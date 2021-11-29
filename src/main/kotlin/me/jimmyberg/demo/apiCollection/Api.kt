@@ -1,4 +1,4 @@
-package me.jimmyberg.demo.apis
+package me.jimmyberg.demo.apiCollection
 
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
