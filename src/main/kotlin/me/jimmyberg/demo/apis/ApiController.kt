@@ -2,6 +2,7 @@ package me.jimmyberg.demo.apis
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -11,6 +12,9 @@ class ApiController(
 ) {
 
     @GetMapping
-    fun getApi() = apiService.getApi()
+    fun getApi() = apiService.getAll()
+
+    @GetMapping("/one")
+    fun getApi(@RequestParam request: MutableMap<String, Any>) = apiService.getOne(request)
 
 }
