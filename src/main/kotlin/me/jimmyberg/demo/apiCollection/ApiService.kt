@@ -8,15 +8,11 @@ import org.springframework.stereotype.Service
 
 @Service
 class ApiService(
-    val apiRepository: ApiRepository,
     val mongoOperations: MongoOperations
 ) {
 
     fun getApi(request: Map<String, Any>): ResponseEntity<Map<String, Any>> {
-        val query = Query()
-        request.keys.forEach {
-            query.addCriteria(where("request.$it").`is`(request[it]))
-        }
+        val query = Query().addCriteria(where("request").`is`(request))
         val api = mongoOperations.findOne(query, Api::class.java)
         return ResponseEntity.ok(api?.response)
     }
