@@ -1,0 +1,286 @@
+// 1. mock_api 등록 query
+db.mock_api.insertMany([
+    // 이의 신청 등록 API
+    {
+        url: "/api/v1/opposition",
+        depths: 3,
+        http_method: "POST",
+        api_method: "POST",
+        model: "opposition",
+        paging: false,
+        request: {
+            "reqName": "string",
+            "reqContact": "string",
+            "reqLocalCode": "string",
+            "agtYn": "string",
+            "evidence": "string",
+            "reqSocNo": "string",
+            "reqSocSeq": "string",
+            "agtName": "string",
+            "agtBirth": "string",
+            "agtSex": "string",
+            "agtContact": "string",
+            "relationship": "string",
+            "reasonType": "string",
+            "reason": "string",
+            "member": "array",
+            "contact": "string",
+            "preSocNo": "string",
+            "pstSocNo": "string",
+            "recName": "string"
+        },
+        response: {
+            "code": "200",
+            "message": "OK",
+            "data": "number"
+        }
+    },
+    // 이의 신청 목록 조회 API
+    {
+        url: "/api/v1/opposition",
+        depths: 3,
+        http_method: "GET",
+        api_method: "GET",
+        model: "opposition",
+        paging: true,
+        paginate: {
+            "page": "page",
+            "pageSize": "rows",
+            "totalPages": "totalPages",
+            "totalElements": "totalElements"
+        },
+        request: {
+            page: "number",
+            rows: "number",
+            reqLocalCode: "string",
+            reqName: "string",
+            reqSocNo: "string",
+            reasonType: "string",
+            agtName: "string",
+            agtBirth: "string",
+            status: "string",
+            regDateStart: "string",
+            regDateEnd: "string"
+        },
+        response: {
+            "code": "200",
+            "message": "OK",
+            "data": {
+                "totalPages": "number",
+                "totalElements": "number",
+                "content": {
+                    "seq": "number",
+                    "reqName": "string",
+                    "reqLocalCode": "string",
+                    "reqSocNo": "string",
+                    "reqSocSeq": "string",
+                    "agtBirth": "string",
+                    "reasonType": "string",
+                    "status": "string",
+                    "payDate": "string",
+                    "payAmount": "string",
+                    "regDate": "string",
+                    "preSocNo": "string",
+                    "pstSocNo": "string",
+                    "recName": "string",
+                    "admName": "string",
+                    "admDate": "string"
+                }
+            }
+        }
+    },
+    // 이의 신청 상세 조회 API
+    {
+        url: "/api/v1/opposition/{seq}",
+        depths: 4,
+        http_method: "GET",
+        api_method: "GET",
+        model: "opposition",
+        paging: false,
+        request: {
+            seq: "number"
+        },
+        response: {
+            "code": "200",
+            "message": "OK",
+            "data": {
+                "seq": "number",
+                "reqName": "string",
+                "reqContact": "string",
+                "reqLocalCode": "string",
+                "reqSocNo": "string",
+                "reqSocSeq": "string",
+                "evidence": "string",
+                "agtYn": "string",
+                "agtName": "string",
+                "agtBirth": "string",
+                "agtSex": "string",
+                "agtContact": "string",
+                "relatioinship": "string",
+                "reasonType": "string",
+                "reason": "string",
+                "status": "string",
+                "member": "array",
+                "contact": "string",
+                "payDate": "string",
+                "payAmount": "string",
+                "regDate": "string",
+                "preSocNo": "string",
+                "pstSocNo": "string",
+                "recName": "string",
+                "admReason": "string",
+                "admName": "string",
+                "admDate": "string"
+            }
+        }
+    },
+    // 이의 신청 수정 API
+    {
+        url: "/api/v1/opposition/{seq}",
+        depths: 4,
+        http_method: "POST",
+        api_method: "POST",
+        model: "opposition",
+        paging: false,
+        request: {
+            "seq": "number",
+            "reqContact": "string",
+            "reqLocalCode": "string",
+            "reqName": "string",
+            "reqSocNo": "string",
+            "evidence": "string",
+            "agtYn": "string",
+            "agtName": "string",
+            "agtBirth": "string",
+            "agtSex": "string",
+            "agtContact": "string",
+            "relationship": "string",
+            "status": "string",
+            "member": "array",
+            "contact": "string",
+            "preSocNo": "string",
+            "pstSocNo": "string",
+            "admName": "string"
+        },
+        response: {
+            "code": "string",
+            "message": "string",
+            "data": "number"
+        }
+    }
+])
+
+// 2. model_info 등록 query
+db.model_info.insertOne(
+    {
+        title: "opposition",
+        seqName: "oppositionSeq",
+        seqColumn: "seq",
+        columns: {
+            "seq": "number",
+            "reqName": "string",
+            "reqContact": "string",
+            "reqLocalCode": "string",
+            "agtYn": "string",
+            "evidence": "string",
+            "reqSocNo": "string",
+            "reqSocSeq": "string",
+            "agtName": "string",
+            "agtBirth": "string",
+            "agtSex": "string",
+            "agtContact": "string",
+            "relationship": "string",
+            "reasonType": "string",
+            "reason": "string",
+            "member": "array",
+            "contact": "string",
+            "preSocNo": "string",
+            "pstSocNo": "string",
+            "recName": "string",
+            "status": "string",
+            "admName": "string",
+            "admDate": "string"
+        }
+    }
+)
+
+// 3. counters 등록 query
+db.counters.insertOne(
+    {
+        _id: "oppositionSeq",
+        seq: 0
+    }
+)
+
+// 3-2. sequence js script
+function getNextSequence(name) {
+    let ret = db.counters.findAndModify({
+        query: { _id: name },
+        update : { $inc: { seq: 1 } }
+    });
+    return ret.seq;
+}
+
+// 3. model_data 등록 query
+db.model_data.insertMany([
+    {
+        model_id: "61af3e1f064fb628136a7ba9",
+        data: {
+            // "seq": getNextSequence("oppositionSeq"),
+            "reqName": "김지윤",
+            "reqContact": "01020326457",
+            "reqLocalCode": "001",
+            "agtYn": "N",
+            "evidence": "증빙서류-1",
+            "reqSocNo": "9003091234567",
+            "reqSocSeq": "9003091234567",
+            "agtName": "김수지",
+            "agtBirth": "19900202",
+            "agtSex": "Female",
+            "agtContact": "01020748265",
+            "relationship": "배우자",
+            "reasonType": "집값 좀 내려줘요",
+            "reason": "솔직히 서울 집값 미쳤잖아요",
+            "member": [
+                {"mName":"김모건","mSocNo":"2203091234567","mType":"세대원","mAction":"A"}
+            ],
+            "contact": "01020326457",
+            "preSocNo": "9003091234567",
+            "pstSocNo": "9003091234567",
+            "recName": "김지윤",
+            "status": "U",
+            "admName": "김지윤",
+            "admDate": "2021-11-30 20:15:04"
+        }
+    },
+    {
+        model_id: "61adc222064fb628136a7b7c",
+        data: {
+            // "seq": getNextSequence("oppositionSeq"),
+            "reqName": "김수지",
+            "reqContact": "01020748265",
+            "reqLocalCode": "002",
+            "agtYn": "N",
+            "evidence": "증빙서류-2",
+            "reqSocNo": "9002021234567",
+            "reqSocSeq": "9002021234567",
+            "agtName": "김지윤",
+            "agtBirth": "19900309",
+            "agtSex": "Male",
+            "agtContact": "01020326457",
+            "relationship": "배우자",
+            "reasonType": "집값 좀 내려달라고요",
+            "reason": "어디 가서 사나요",
+            "member": [
+                {"mName":"김모아","mSocNo":"2303091234567","mType":"세대원","mAction":"B"}
+            ],
+            "contact": "01020748265",
+            "preSocNo": "9002021234567",
+            "pstSocNo": "9002021234567",
+            "recName": "김지윤",
+            "status": "U",
+            "admName": "김지윤",
+            "admDate": "2021-11-30 20:15:04"
+        }
+    }
+])

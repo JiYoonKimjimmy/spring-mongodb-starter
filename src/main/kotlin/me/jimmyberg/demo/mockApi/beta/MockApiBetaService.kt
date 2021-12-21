@@ -1,4 +1,4 @@
-package me.jimmyberg.demo.mockApi
+package me.jimmyberg.demo.mockApi.beta
 
 import me.jimmyberg.demo.config.EMPTY
 import org.springframework.beans.factory.annotation.Value
@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class MockApiService(
+class MockApiBetaService(
     val mongoOperations: MongoOperations
 ) {
 

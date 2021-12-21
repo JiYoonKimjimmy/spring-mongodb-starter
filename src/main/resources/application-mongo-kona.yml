@@ -1,0 +1,9 @@
+# spring
+spring:
+  data:
+    mongodb:
+      host: 118.33.122.28
+      port: 27017
+      database: ms
+      username: mock
+      password: Kona!234

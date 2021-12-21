@@ -22,13 +22,13 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web:2.5.6")
-    implementation("org.springframework.boot:spring-boot-starter-data-mongodb:2.5.6")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.6.1")
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb:2.6.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("io.springfox:springfox-boot-starter:3.0.0")
-    testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.6")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.0")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.1")
 }
 
 tasks.withType<KotlinCompile> {

@@ -1,0 +1,9 @@
+# spring
+spring:
+  data:
+    mongodb:
+      host: ec2-3-38-96-99.ap-northeast-2.compute.amazonaws.com
+      port: 27017
+      database: ms
+      username: mock
+      password: Mock!234
